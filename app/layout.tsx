@@ -7,7 +7,10 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ledger",
+  title: {
+    default: "Ledger",
+    template: `%s | Ledger`,
+  },
   description: "Controle suas finanças de maneira fácil, rápida e interativa.",
 };
 
