@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import { Toaster } from "~/components/ui/sonner";
 import { cn } from "~/lib/utils";
 import "./globals.css";
 
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={cn(inter.className, "dark")}>{children}</body>
+      <body className={cn(inter.className, "dark")}>
+        {children}
+        <Toaster />
+      </body>
     </html>
   );
 }
