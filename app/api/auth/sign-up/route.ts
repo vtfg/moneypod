@@ -1,6 +1,7 @@
 import { type NextRequest } from "next/server";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 import { prisma } from "~/lib/prisma";
 
@@ -15,7 +16,14 @@ export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as SignUpRequestDTO;
 
-    const user = await prisma.user.create({ data: body });
+    const hashPassword = await bcrypt.hash(body.password, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        ...body,
+        password: hashPassword,
+      },
+    });
 
     const token = jwt.sign({ id: user.id }, "secret_key");
     cookies().set("token", token);

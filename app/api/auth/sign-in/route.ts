@@ -1,6 +1,7 @@
 import { type NextRequest } from "next/server";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 import { prisma } from "~/lib/prisma";
 
@@ -19,7 +20,9 @@ export async function POST(request: NextRequest) {
       throw new Error("Credenciais inválidas.");
     }
 
-    if (body.password !== user.password) {
+    const passwordMatches = await bcrypt.compare(body.password, user.password);
+
+    if (!passwordMatches) {
       throw new Error("Credenciais inválidas.");
     }
 
