@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -53,7 +54,26 @@ export default function SignUpForm() {
   });
 
   async function handleSignUp(data: FormData) {
-    console.log(data);
+    try {
+      const response = await fetch("/api/auth/sign-up", {
+        method: "POST",
+        body: JSON.stringify({
+          firstName: data.first_name,
+          lastName: data.last_name,
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      if (!response.ok) {
+        toast.error("Oops. Ocorreu um erro na criação da sua conta!");
+        return;
+      }
+
+      toast.success("Conta criada com sucesso!");
+    } catch (err) {
+      toast.error("Oops. Ocorreu um erro na criação da sua conta!");
+    }
   }
 
   return (
