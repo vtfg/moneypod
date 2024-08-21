@@ -26,8 +26,10 @@ export async function POST(request: NextRequest) {
       throw new Error("Credenciais inválidas.");
     }
 
-    const token = jwt.sign({ id: user.id }, "secret_key");
-    cookies().set("token", token);
+    const token = jwt.sign({ id: user.id }, "secret_key", {
+      expiresIn: "2h",
+    });
+    cookies().set("token", token, { httpOnly: true });
 
     return Response.json(user, { status: 200 });
   } catch (err) {
