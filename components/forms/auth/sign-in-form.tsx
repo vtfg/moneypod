@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -32,6 +33,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function SignInForm() {
+  const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -52,6 +54,7 @@ export default function SignInForm() {
       }
 
       toast.success("Logado com sucesso!");
+      router.push("/dashboard");
     } catch (err) {
       toast.error("Oops. Ocorreu um erro no seu login!");
     }
@@ -107,7 +110,11 @@ export default function SignInForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitting}
+            >
               Login
             </Button>
             <div className="mt-4 text-center text-sm">

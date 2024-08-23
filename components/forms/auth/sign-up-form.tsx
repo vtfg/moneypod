@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -49,6 +50,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function SignUpForm() {
+  const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -71,6 +73,7 @@ export default function SignUpForm() {
       }
 
       toast.success("Conta criada com sucesso!");
+      router.push("/dashboard");
     } catch (err) {
       toast.error("Oops. Ocorreu um erro na criação da sua conta!");
     }
@@ -152,7 +155,11 @@ export default function SignUpForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={form.formState.isSubmitting}
+            >
               Criar minha conta
             </Button>
 

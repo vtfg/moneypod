@@ -19,3 +19,11 @@ As a registered user, I want to log in to my account so that I can access my das
 - Users can enter their email and password to log in.
 - Users receive an error message if the credentials are incorrect.
 - Users can remain logged in for a specified period (e.g., "Remember Me" option).
+
+### Dashboard
+
+As a user, I want to see my dashboard so that I can access the application's features.
+
+##### Acceptance Criteria
+
+- User should be logged in.
