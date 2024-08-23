@@ -112,7 +112,7 @@ export default function SignInForm() {
             </Button>
             <div className="mt-4 text-center text-sm">
               Não tem uma conta?{" "}
-              <Link href="/auth/sign-up" className="underline">
+              <Link href="/sign-up" className="underline">
                 Criar
               </Link>
             </div>
