@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
+import { LoaderCircle } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -163,6 +164,9 @@ export default function SignUpForm() {
               className="w-full"
               disabled={form.formState.isSubmitting}
             >
+              {form.formState.isSubmitting && (
+                <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+              )}
               Criar minha conta
             </Button>
 
