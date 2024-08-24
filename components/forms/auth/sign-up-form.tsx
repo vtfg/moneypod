@@ -25,6 +25,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { passwordSchema } from "~/lib/utils";
+import { createClient } from "~/lib/supabase/client";
 
 export const metadata = {
   title: "Crie sua conta",
@@ -51,23 +52,25 @@ type FormData = z.infer<typeof schema>;
 
 export default function SignUpForm() {
   const router = useRouter();
+  const supabase = createClient();
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   async function handleSignUp(data: FormData) {
     try {
-      const response = await fetch("/api/auth/sign-up", {
-        method: "POST",
-        body: JSON.stringify({
-          firstName: data.first_name,
-          lastName: data.last_name,
-          email: data.email,
-          password: data.password,
-        }),
+      const response = await supabase.auth.signUp({
+        email: data.email,
+        password: data.password,
+        options: {
+          data: {
+            first_name: data.first_name,
+            last_name: data.last_name,
+          },
+        },
       });
 
-      if (!response.ok) {
+      if (response.error) {
         toast.error("Oops. Ocorreu um erro na criação da sua conta!");
         return;
       }
