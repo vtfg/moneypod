@@ -1,12 +1,10 @@
-import { use } from "react";
-
 import { createClient } from "~/lib/supabase/server";
 
-export default function Dashboard() {
+export default async function Dashboard() {
   const supabase = createClient();
   const {
     data: { user },
-  } = use(supabase.auth.getUser());
+  } = await supabase.auth.getUser();
 
   return (
     <>

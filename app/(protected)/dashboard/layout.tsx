@@ -1,14 +1,18 @@
-"use client";
-
 import Navbar from "~/components/dashboard/navbar";
 import UserNavigation from "~/components/dashboard/user-navigation";
 import Logo from "~/components/logo";
+import { createClient } from "~/lib/supabase/server";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <div className="flex flex-col">
       <div className="border-b px-4">
@@ -16,7 +20,7 @@ export default function DashboardLayout({
           <Logo />
           <Navbar className="mx-6" />
           <div className="ml-auto flex items-center space-x-4">
-            <UserNavigation />
+            <UserNavigation user={user} />
           </div>
         </div>
       </div>

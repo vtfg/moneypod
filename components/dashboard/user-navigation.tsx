@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+"use client";
+
 import { useRouter } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 
@@ -9,28 +10,18 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 import { createClient } from "~/lib/supabase/client";
 
-export default function UserNavigation() {
+interface UserNavigationProps {
+  user: User | null;
+}
+
+export default function UserNavigation({ user }: UserNavigationProps) {
   const router = useRouter();
   const supabase = createClient();
-
-  const [user, setUser] = useState<User | null>();
-
-  useEffect(() => {
-    async function getUser() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-    }
-
-    getUser();
-  }, []);
 
   async function handleSignOut() {
     await supabase.auth.signOut();
