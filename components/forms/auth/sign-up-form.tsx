@@ -25,7 +25,7 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { passwordSchema } from "~/lib/utils";
+import { passwordSchema } from "~/lib/validation/schemas";
 import { createClient } from "~/lib/supabase/client";
 
 export const metadata = {
