@@ -5,17 +5,14 @@ import { Button } from "~/components/ui/button";
 import { Logo } from "~/components/logo";
 import { UserNavigation } from "~/components/dashboard/user-navigation";
 import { DesktopSidebar, MobileSidebar } from "~/components/dashboard/sidebar";
-import { createClient } from "~/lib/supabase/server";
+import { getUser } from "~/lib/data/user";
 
 export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getUser();
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
