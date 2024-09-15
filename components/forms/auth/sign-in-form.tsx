@@ -80,7 +80,7 @@ export default function SignInForm() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="max@robinson.com"
+                      placeholder="john@example.com"
                       {...field}
                     />
                   </FormControl>
