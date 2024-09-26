@@ -78,6 +78,8 @@ export default function CreateTransactionForm() {
 
   useEffect(() => {
     if (!open) form.reset();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
