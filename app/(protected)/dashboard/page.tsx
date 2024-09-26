@@ -1,4 +1,4 @@
-import { Button } from "~/components/ui/button";
+import CreateTransactionForm from "~/components/forms/dashboard/create-transaction-form";
 
 export default async function Dashboard() {
   return (
@@ -16,9 +16,10 @@ export default async function Dashboard() {
           </h3>
           <p className="text-sm text-muted-foreground">
             Para que possamos configurar a sua dashboard, você precisa de pelo
-            menos uma transação adicionad.
+            menos uma transação adicionada.
           </p>
-          <Button className="mt-4">Adicionar transação</Button>
+
+          <CreateTransactionForm />
         </div>
       </div>
     </>
