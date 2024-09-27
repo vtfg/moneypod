@@ -85,7 +85,7 @@ export default function CreateTransactionForm() {
   return (
     <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>
-        <Button className="mt-4">Adicionar transação</Button>
+        <Button>Adicionar transação</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
