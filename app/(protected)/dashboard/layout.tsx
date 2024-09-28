@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { Bell } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
 import { Logo } from "~/components/logo";
 import { UserNavigation } from "~/components/dashboard/user-navigation";
 import { DesktopSidebar, MobileSidebar } from "~/components/dashboard/sidebar";
@@ -22,10 +20,6 @@ export default async function DashboardLayout({
             <Link href="#">
               <Logo />
             </Link>
-            <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-              <Bell className="h-4 w-4" />
-              <span className="sr-only">Toggle notifications</span>
-            </Button>
           </div>
           <DesktopSidebar />
         </div>
